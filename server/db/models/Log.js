@@ -2,7 +2,7 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 
 
-const Week = db.define('week', {
+const Log = db.define('week', {
   id: {
     type: Sequelize.INTEGER,
     autoIncrement: true,
@@ -21,4 +21,4 @@ const Week = db.define('week', {
 })
 
 
-module.exports = Week
+module.exports = Log

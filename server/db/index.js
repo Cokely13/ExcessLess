@@ -8,8 +8,8 @@ const Treat = require('./models/Treat')
 
 //associations could go here!
 
-User.belongsToMany(Treat, { through: 'UserTreats' });
-Treat.belongsToMany(User, { through: 'UserTreats' });
+Week.hasMany(Treat)
+Treat.belongsTo(User)
 Week.belongsTo(User)
 User.hasMany(Week)
 
