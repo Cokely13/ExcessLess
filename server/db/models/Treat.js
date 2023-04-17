@@ -10,7 +10,7 @@ const Treat = db.define('treat', {
         unique: true,
     },
    name: {
-      type: Sequelize.INTEGER,
+      type: Sequelize.STRING,
       allowNull: false,
       unique: false
   },

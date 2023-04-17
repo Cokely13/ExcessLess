@@ -1,8 +1,13 @@
 'use strict'
 
-const {db, models: {User} } = require('../server/db')
+const {db, models: {User, Treat} } = require('../server/db')
 
 /**
+ *
+ *
+ *
+ *
+ *
  * seed - this function clears the database, updates tables to
  *      match the models, and populates the database.
  */
@@ -14,6 +19,57 @@ async function seed() {
   const users = await Promise.all([
     User.create({ username: 'cody', password: '123' }),
     User.create({ username: 'murphy', password: '123' }),
+  ])
+
+  const treats = await Promise.all([
+    Treat.create({
+      name: 'Candy',
+      cals: 100,
+      size: '1 piece',
+      servings: 35
+    }),
+    Treat.create({
+      name: 'Hard Liquor',
+      cals: 120,
+      size: '1.5 ounces',
+      servings: 30
+    }),
+    Treat.create( {
+      name: 'Cake',
+      cals: 150,
+      size: '1 slice',
+      servings: 23
+    }),
+    Treat.create({
+      name: 'Donut',
+      cals: 200,
+      size: '1 donut',
+      servings: 18
+    }),
+    Treat.create( {
+      name: 'Potato Chips',
+      cals: 160,
+      size: '1 ounce',
+      servings: 22
+    }),
+    Treat.create( {
+      name: 'Wine',
+      cals: 120,
+      size: '5 ounces',
+      servings: 30
+    }),
+    Treat.create({
+      name: 'Beer',
+      cals: 200,
+      size: '12 ounces',
+      servings: 17
+    }),
+    Treat.create( {
+      name: 'Soda',
+      cals: 150,
+      size: '12 ounces',
+      servings: 25
+    }),
   ])
 
   console.log(`seeded ${users.length} users`)
