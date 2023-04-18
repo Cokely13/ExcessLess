@@ -22,6 +22,18 @@ const Week = db.define('week', {
       type: Sequelize.INTEGER,
       allowNull: false
   },
+  treatName: {
+    type: Sequelize.STRING,
+    allowNull: false,
+},
+cals: {
+  type: Sequelize.INTEGER,
+  allowNull: false
+},
+size: {
+type: Sequelize.STRING,
+allowNull: false
+},
   number: {
     type: Sequelize.INTEGER,
     allowNull: false

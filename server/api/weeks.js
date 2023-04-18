@@ -1,11 +1,14 @@
 const router = require('express').Router()
-const { models: { Week}} = require('../db')
+const { models: { Week, User}} = require('../db')
 module.exports = router
 
 
 router.get('/', async (req, res, next) => {
   try {
-    const weeks = await Week.findAll()
+    const weeks = await Week.findAll({
+
+      include: [User],
+    })
     res.json(weeks)
   } catch (err) {
     next(err)
@@ -25,7 +28,9 @@ router.post("/", async (req, res, next) => {
 //Get read all weeks
 router.get('/:id', async (req, res, next) => {
   try {
-    const weeks = await Week.findByPk(req.params.id)
+    const weeks = await Week.findByPk(req.params.id, {
+      include: [User],
+    })
   ;
     res.json(weeks)
   } catch (err) {

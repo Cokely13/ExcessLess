@@ -51,6 +51,19 @@ function Treats() {
     return isNaN(curr) ? acc : acc + parseFloat(curr);
   }, 0);
 
+  const handleSubmit = async () => {
+    allTreats.forEach((treat) => {
+      const quantity = dailyValues[treat.id];
+      if (quantity > 0) {
+        dispatch(createWeek({ userId: id, treatId: treat.id, treatName: treat.name,cals: treat.cals,
+          size: treat.size,  number: quantity }));
+      }
+    });
+
+    await dispatch(fetchTreats());
+    setDailyValues({});
+  };
+
   return (
     <div>
       <h2>Treats</h2>
@@ -115,6 +128,9 @@ function Treats() {
           </tr>
         </tbody>
       </table>
+      <div>
+      <button onClick={handleSubmit}>Submit</button>
+      </div>
     </div>
   );
                   }

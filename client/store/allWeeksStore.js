@@ -37,9 +37,25 @@ export const createWeek = (week) => {
   return async (dispatch) => {
     const { data: created } = await Axios.post("/api/weeks", week);
     dispatch(_createWeek(created));
-    // history.push("/weeks");
+    dispatch(fetchWeeks());
   };
 };
+
+// export const createWeek = (week) => {
+//   return async (dispatch) => {
+//     const treats = week.treats.map((treat) => ({
+//       treatId: treat.id,
+//       number: treat.quantity,
+//     }));
+//     const newWeek = {
+//       ...week,
+//       treats: treats,
+//     };
+//     const { data: created } = await Axios.post("/api/weeks", newWeek);
+//     dispatch(_createWeek(created));
+//     dispatch(fetchWeeks());
+//   };
+// };
 
 export const deleteWeek = (id, history) => {
   return async (dispatch) => {
