@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createWeek } from '../store/allWeeksStore';
+import { createWeek } from '../store/allEntriesStore';
 import { fetchTreats } from '../store/allTreatsStore';
 
 function WeekForm() {

@@ -4,19 +4,19 @@ import thunkMiddleware from 'redux-thunk'
 import {composeWithDevTools} from 'redux-devtools-extension'
 import treatsReducer from './allTreatsStore'
 import userReducer from './allUsersStore'
-import weeksReducer from './allWeeksStore'
+import entriesReducer from './allEntriesStore'
 import singleTreatReducer from './singleTreatStore'
 import singleUserReducer from './singleUserStore'
-import singleWeekReducer from './singleWeekStore'
+import singleEntryReducer from './singleEntryStore'
 import auth from './auth'
 
 const reducer = combineReducers({ auth,
 allTreats: treatsReducer,
 allUsers: userReducer,
-allWeeks: weeksReducer,
+allEntries: entriesReducer,
 singleTreat: singleTreatReducer,
 singleUser: singleUserReducer,
-singleWeekReducer: singleWeekReducer })
+singleEntryReducer: singleEntryReducer })
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
 )

@@ -1,11 +1,11 @@
 const router = require('express').Router();
-const { models: { User, Week } } = require('../db');
+const { models: { User, Entry } } = require('../db');
 
 router.get('/', async (req, res, next) => {
   try {
     const users = await User.findAll({
       attributes: ['id', 'username'],
-      include: [Week],
+      include: [Entry],
     });
     res.json(users);
   } catch (err) {
@@ -34,7 +34,7 @@ router.get('/:id', async (req, res, next) => {
   try {
     const user = await User.findByPk(req.params.id, {
       attributes: ['id', 'username'],
-      include: [Week],
+      include: [Entry],
     });
     res.json(user);
   } catch (err) {

@@ -3,22 +3,22 @@
 const db = require('./db')
 
 const User = require('./models/User')
-const Week = require('./models/Week')
+const Entry = require('./models/Entry')
 const Treat = require('./models/Treat')
 
 //associations could go here!
 
-// Treat.belongsTo(Week)
-// Week.hasMany(Treat)
+// Treat.belongsTo(Entry)
+// Entry.hasMany(Treat)
 
-Week.belongsTo(User)
-User.hasMany(Week)
+Entry.belongsTo(User)
+User.hasMany(Entry)
 
 module.exports = {
   db,
   models: {
     User,
-    Week,
+    Entry,
     Treat,
   },
 }

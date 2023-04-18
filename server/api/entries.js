@@ -1,38 +1,38 @@
 const router = require('express').Router()
-const { models: { Week, User}} = require('../db')
+const { models: { Entry, User}} = require('../db')
 module.exports = router
 
 
 router.get('/', async (req, res, next) => {
   try {
-    const weeks = await Week.findAll({
+    const entries = await Entry.findAll({
 
       include: [User],
     })
-    res.json(weeks)
+    res.json(entries)
   } catch (err) {
     next(err)
   }
 })
 
-//POST: add a new Week
+//POST: add a new Entry
 router.post("/", async (req, res, next) => {
   try {
-    res.status(201).send(await Week.create(req.body));
+    res.status(201).send(await Entry.create(req.body));
   } catch (error) {
     next(error);
   }
 });
 
 
-//Get read all weeks
+//Get read all entries
 router.get('/:id', async (req, res, next) => {
   try {
-    const weeks = await Week.findByPk(req.params.id, {
+    const entries = await Entry.findByPk(req.params.id, {
       include: [User],
     })
   ;
-    res.json(weeks)
+    res.json(entries)
   } catch (err) {
     next(err)
   }
@@ -40,9 +40,9 @@ router.get('/:id', async (req, res, next) => {
 
 router.delete('/:id', async (req, res, next) => {
   try {
-    const week = await Week.findByPk(req.params.id);
-    await week.destroy();
-    res.send(week);
+    const entry = await Entry.findByPk(req.params.id);
+    await entry.destroy();
+    res.send(entry);
   } catch (error) {
     next(error);
   }

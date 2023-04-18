@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchTreats } from '../store/allTreatsStore';
-import { createWeek } from '../store/allWeeksStore';
+import { createEntry} from '../store/allEntriesStore';
 
 function Treats() {
   const dispatch = useDispatch();
@@ -55,7 +55,7 @@ function Treats() {
     allTreats.forEach((treat) => {
       const quantity = dailyValues[treat.id];
       if (quantity > 0) {
-        dispatch(createWeek({ userId: id, treatId: treat.id, treatName: treat.name,cals: treat.cals,
+        dispatch(createEntry({ userId: id, treatId: treat.id, treatName: treat.name,cals: treat.cals,
           size: treat.size,  number: quantity }));
       }
     });
