@@ -18,6 +18,14 @@ const Week = db.define('week', {
         type: Sequelize.INTEGER,
         allowNull: false
     },
+    treatId: {
+      type: Sequelize.INTEGER,
+      allowNull: false
+  },
+  number: {
+    type: Sequelize.INTEGER,
+    allowNull: false
+},
 })
 
 

@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchTreats } from '../store/allTreatsStore';
+import { createWeek } from '../store/allWeeksStore';
 
 function Treats() {
   const dispatch = useDispatch();
   const allTreats = useSelector((state) => state.allTreats);
+  const {id} = useSelector((state) => state.auth);
 
   useEffect(() => {
     dispatch(fetchTreats());
@@ -19,6 +21,9 @@ function Treats() {
       [id]: value,
     }));
   };
+
+  console.log('daily', dailyValues)
+  console.log('id', id)
 
   const calculateDailyLbs = (cals, daily) => {
     const dailyLbs = (cals * daily) / 3500;

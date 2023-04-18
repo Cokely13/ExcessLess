@@ -9,15 +9,19 @@ const Log = db.define('week', {
     primaryKey: true,
     unique: true,
 },
-   date: {
+   weekId: {
     type: Sequelize.DATE,
     allowNull: false,
     defaultValue: Sequelize.NOW
   },
-    userId: {
+    treatId: {
         type: Sequelize.INTEGER,
         allowNull: false
     },
+    number: {
+      type: Sequelize.INTEGER,
+      allowNull: false
+  },
 })
 
 
