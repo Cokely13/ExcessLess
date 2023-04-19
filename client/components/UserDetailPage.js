@@ -57,10 +57,9 @@ function UserDetailPage() {
         <div className="entries-container">
           <div className="entry-date-list">
             <h3>Entries by Date</h3>
-            {user.entries.map((entry => entry.date))}
-            {/* {uniqueDates.map((date) => (
+            { (Array.from(new Set(user.entries.map((entry => entry.date))))).map((date) => (
               <button key={date} onClick={() => console.log(date)}>{date}</button>
-            ))} */}
+            ))}
           </div>
           <table className="entries-table">
             <thead>
