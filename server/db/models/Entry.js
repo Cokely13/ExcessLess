@@ -10,7 +10,7 @@ const Entry = db.define('entry', {
     unique: true,
 },
    date: {
-    type: Sequelize.DATE,
+    type: Sequelize.STRING,
     allowNull: false,
     defaultValue: Sequelize.NOW
   },

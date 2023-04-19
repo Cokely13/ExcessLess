@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchTreats } from '../store/allTreatsStore';
-import { createEntry} from '../store/allEntriesStore';
+import { createEntry } from '../store/allEntriesStore';
 
 function Treats() {
   const dispatch = useDispatch();
   const allTreats = useSelector((state) => state.allTreats);
-  const {id} = useSelector((state) => state.auth);
+  const { id } = useSelector((state) => state.auth);
+
+  const [selectedWeek, setSelectedWeek] = useState('');
 
   useEffect(() => {
     dispatch(fetchTreats());
@@ -21,9 +23,6 @@ function Treats() {
       [id]: value,
     }));
   };
-
-  console.log('daily', dailyValues)
-  console.log('id', id)
 
   const calculateDailyLbs = (cals, daily) => {
     const dailyLbs = (cals * daily) / 3500;
@@ -55,8 +54,17 @@ function Treats() {
     allTreats.forEach((treat) => {
       const quantity = dailyValues[treat.id];
       if (quantity > 0) {
-        dispatch(createEntry({ userId: id, treatId: treat.id, treatName: treat.name,cals: treat.cals,
-          size: treat.size,  number: quantity }));
+        dispatch(
+          createEntry({
+            userId: id,
+            treatId: treat.id,
+            treatName: treat.name,
+            cals: treat.cals,
+            size: treat.size,
+            number: quantity,
+            date: selectedWeek,
+          })
+        );
       }
     });
 
@@ -64,9 +72,37 @@ function Treats() {
     setDailyValues({});
   };
 
+  function getWeekOptions() {
+    const startDate = new Date('2023-04-23');
+    const endDate = new Date(startDate.getFullYear(), startDate.getMonth() + 3, 0);
+    const options = [];
+    let currentDate = startDate;
+    while (currentDate <= endDate) {
+      const sunday = new Date(currentDate.setDate(currentDate.getDate() - currentDate.getDay()));
+      options.push(sunday.toISOString().substring(0, 10));
+      currentDate.setDate(currentDate.getDate() + 7);
+    }
+    return options;
+  }
+
+  const weekOptions = getWeekOptions();
+
   return (
     <div>
       <h2>Treats</h2>
+      <label htmlFor="week-select">Select Week:</label>
+      <select
+        id="week-select"
+        value={selectedWeek}
+        onChange={(event) => setSelectedWeek(event.target.value)}
+      >
+        <option value=""></option>
+        {weekOptions.map((option) => (
+          <option key={option} value={option}>
+            {option}
+          </option>
+        ))}
+      </select>
       <table className="treats-table">
         <thead>
           <tr>
@@ -129,7 +165,7 @@ function Treats() {
         </tbody>
       </table>
       <div>
-      <button onClick={handleSubmit}>Submit</button>
+        <button onClick={handleSubmit}>Submit</button>
       </div>
     </div>
   );
