@@ -6,6 +6,7 @@ import Home from './components/Home';
 import Treats from './components/Treats';
 import WeekForm from './components/WeekForm';
 import UserPage from './components/UserPage';
+import Graph from './components/Graph';
 import UserDetailPage from './components/UserDetailPage';
 import {me} from './store'
 
@@ -26,6 +27,7 @@ class Routes extends Component {
           <Switch>
             <Route exact path="/home" component={Home} />
             <Route exact path="/treats" component={Treats} />
+            <Route exact path="/graph" component={Graph} />
             <Route exact path="/users" component={UserPage} />
             <Route exact path="/users/:userId" component={UserDetailPage} />
             <Route exact path="/week" component={WeekForm} />

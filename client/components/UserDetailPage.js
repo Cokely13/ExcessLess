@@ -11,6 +11,9 @@ function UserDetailPage() {
   const [showWeek, setShowWeek] = useState(false);
   const [showTotal, setShowTotal] = useState(false);
 
+
+  console.log('user', user)
+
   useEffect(() => {
     dispatch(fetchSingleUser(userId));
   }, [dispatch, userId]);
