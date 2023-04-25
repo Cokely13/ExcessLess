@@ -8,6 +8,7 @@ const TreatsInfo = () => {
   const {id} = useSelector((state) => state.auth);
   const user = useSelector((state) => state.singleUser);
   const [showChart, setShowChart] = useState(false)
+  const [showDate, setShowDate] = useState("")
 
   useEffect(() => {
     dispatch(fetchSingleUser(id))
@@ -18,11 +19,15 @@ const TreatsInfo = () => {
     setShowChart(true)
   }
 
+  const handleShowDate = (event) => {
+    setShowDate(event.target.value)
 
+    // console.log("value", showDate)
+  }
 
-    console.log("user", user)
 
     const entries = user.entries
+    console.log("entries", entries)
 
     return (
       <div>
@@ -30,28 +35,45 @@ const TreatsInfo = () => {
         <button onClick={handleShowChart
     }>Show Chart</button>
     <div>
+
    {showChart ?
-         <PieChart entries={entries} total={user.entries
-    .reduce(
-      (acc, curr) =>
-        acc + parseFloat((curr.cals * curr.number) / 3500),
-      0
-    )
-    .toFixed(2)} names=  {[...new Set(user.entries.map(entry => entry.treatName))]} treatCals = {entries.reduce((acc, entry) => {
-      if (entry.treatName in acc) {
-        acc[entry.treatName] += entry.cals;
-      } else {
-        acc[entry.treatName] = entry.cals;
-      }
-      return acc;
-    }, {})} treatNumber = {entries.reduce((acc, entry) => {
+   <div>
+     <select onChange={handleShowDate}>
+     <option  value="">All</option>
+     {[...new Set(entries.map(entry => entry.date))].map(date => (
+       <option key={date} value={date}>{date}</option>
+     ))}
+   </select>
+         <PieChart  treatCals = {showDate? entries.filter(entry => entry.date == showDate).reduce((acc, entry) => {
+          if (entry.treatName in acc) {
+            acc[entry.treatName] += entry.cals;
+          } else {
+            acc[entry.treatName] = entry.cals;
+          }
+          return acc;
+        }, {}) : entries.reduce((acc, entry) => {
+          if (entry.treatName in acc) {
+            acc[entry.treatName] += entry.cals;
+          } else {
+            acc[entry.treatName] = entry.cals;
+          }
+          return acc;
+        }, {})}
+        treatNumber = {showDate? entries.filter(entry => entry.date == showDate).reduce((acc, entry) => {
       if (entry.treatName in acc) {
         acc[entry.treatName] += entry.number;
       } else {
         acc[entry.treatName] = entry.number;
       }
       return acc;
-    }, {})}   /> :<div></div>}
+    }, {}):entries.reduce((acc, entry) => {
+      if (entry.treatName in acc) {
+        acc[entry.treatName] += entry.number;
+      } else {
+        acc[entry.treatName] = entry.number;
+      }
+      return acc;
+    }, {}) }  /> </div>:<div></div>}
       </div>
       </div>
     );
