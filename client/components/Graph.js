@@ -29,7 +29,7 @@ const Graph = () => {
   }, [user]);
 
 
-  console.log("date", data)
+  console.log("date", user)
 
   return (
     <VictoryChart>

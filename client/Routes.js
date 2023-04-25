@@ -9,6 +9,7 @@ import UserPage from './components/UserPage';
 import Graph from './components/Graph';
 import UserDetailPage from './components/UserDetailPage';
 import {me} from './store'
+import TreatsInfo from './components/TreatsInfo';
 
 /**
  * COMPONENT
@@ -28,6 +29,7 @@ class Routes extends Component {
             <Route exact path="/home" component={Home} />
             <Route exact path="/treats" component={Treats} />
             <Route exact path="/graph" component={Graph} />
+            <Route exact path="/pie" component={TreatsInfo} />
             <Route exact path="/users" component={UserPage} />
             <Route exact path="/users/:userId" component={UserDetailPage} />
             <Route exact path="/week" component={WeekForm} />
