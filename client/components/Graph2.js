@@ -83,7 +83,10 @@ const Graph2 = () => {
         style={{
           tickLabels: {
             fontSize: 5,
+            textAnchor: 'end',
+            padding: 15,
           },
+
         }}
       />
       <VictoryAxis dependentAxis />
