@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { VictoryBar, VictoryChart, VictoryAxis } from 'victory';
+import { VictoryBar, VictoryChart, VictoryAxis, VictoryLabel } from 'victory';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { fetchSingleUser } from '../store/singleUserStore';
@@ -21,9 +21,20 @@ const Graph = () => {
 
   useEffect(() => {
     if (user && user.entries && Array.isArray(user.entries)) {
-      const formattedData = user.entries.map((entry) => ({
+      const formattedData = user.entries.reduce((acc, entry) => {
+        const existingData = acc.find(d => d.date === entry.date);
+        if (existingData) {
+          existingData.treats += entry.number;
+        } else {
+          acc.push({
+            date: entry.date,
+            treats: entry.number
+          })
+        }
+        return acc;
+      }, []).map((entry) => ({
         date: new Date(entry.date),
-        treats: entry.number,
+        treats: entry.treats,
       }));
       setData(formattedData);
     }
@@ -41,7 +52,24 @@ const Graph = () => {
         }}
       />
       <VictoryAxis dependentAxis />
-      <VictoryBar data={data} x="date" y="treats" />
+      <VictoryBar
+        data={data}
+        x="date"
+        y="treats"
+        labels={({ datum }) => datum.treats}
+        labelComponent={<VictoryLabel dy={10} />}
+        style={{
+          data: {
+            fill: "#6C63FF",
+            stroke: "#6C63FF",
+            strokeWidth: 2
+          },
+          labels: {
+            fontSize: 10,
+            fill: "white"
+          }
+        }}
+      />
     </VictoryChart>
   );
 };
