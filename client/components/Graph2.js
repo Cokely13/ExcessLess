@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { fetchSingleUser } from '../store/singleUserStore';
 import { format, parseISO } from 'date-fns';
+import { noData } from 'pg-protocol/dist/messages';
 
 const Graph2 = () => {
   const dispatch = useDispatch();
@@ -49,7 +50,14 @@ const Graph2 = () => {
       }, []).map((entry) => ({
         date: entry.date,
         beer: entry.treats.find(t => t.name === 'Beer')?.count || 0,
-        candy: entry.treats.find(t => t.name === 'Candy')?.count || 0
+        candy: entry.treats.find(t => t.name === 'Candy')?.count || 0,
+        wine: entry.treats.find(t => t.name === 'Wine')?.count || 0,
+        donut: entry.treats.find(t => t.name === 'Donut')?.count || 0,
+        soda: entry.treats.find(t => t.name === 'Soda')?.count || 0,
+        cake: entry.treats.find(t => t.name === 'Cake')?.count || 0,
+        hardliquor: entry.treats.find(t => t.name === 'Hard Liquor')?.count || 0,
+        potatochips: entry.treats.find(t => t.name === 'Potato Chips')?.count || 0,
+
       }));
       setData(formattedData);
     }
@@ -57,35 +65,76 @@ const Graph2 = () => {
 
   const beerColor = '#6C63FF';
   const candyColor = '#FF6F91';
+  const sodaColor = '#00FF00';
+  const hardLiquorColor = '#8A2BE2'
+  const cakeColor = '#FFA500'
+  const donutColor = '#FFFF00'
+  const potatoChipsColor = '#40E0D0'
+  const wineColor = '#00008B'
+
+  console.log('data', data)
 
   return (
-    <VictoryChart>
+    <VictoryChart
+>
       <VictoryAxis
-        tickValues={data.map((entry) => entry.date)}
-        tickFormat={(date) => format(date, 'MMM d')}
+        tickValues={data.map((entry) => entry.date).sort((a, b) => a - b)}
+        tickFormat={(date) => format( date, 'M/d')}
         style={{
           tickLabels: {
-            fontSize: 10,
+            fontSize: 5,
           },
         }}
       />
       <VictoryAxis dependentAxis />
-      <VictoryGroup offset={20}>
+      <VictoryGroup offset={5} >
         <VictoryBar
           data={data}
           x="date"
           y="beer"
-          style={{ data: { fill: beerColor } }}
+          style={{ data: { fill: beerColor, width: 4, alignment: "middle" } }}
           labels={({ datum }) => datum.beer === 0 ? '' : datum.beer}
-          labelComponent={<VictoryLabel dy={10} />}
+          labelComponent={<VictoryLabel dy={0} style={{ fontSize: 4 }} />}
         />
         <VictoryBar
           data={data}
           x="date"
           y="candy"
-          style={{ data: { fill: candyColor } }}
+          style={{ data: { fill: candyColor, width: 4, alignment: "middle" } }}
           labels={({ datum }) => datum.candy === 0 ? '' : datum.candy}
-          labelComponent={<VictoryLabel dy={10} />}
+          labelComponent={<VictoryLabel dy={0} style={{ fontSize: 4 }}/>}
+        />
+        <VictoryBar
+          data={data}
+          x="date"
+          y="wine"
+          style={{ data: { fill: wineColor, width: 4, alignment: "middle" } }}
+          labels={({ datum }) => datum.wine === 0 ? '' : datum.wine}
+          labelComponent={<VictoryLabel dy={0} style={{ fontSize: 4 }} />}
+        />
+        <VictoryBar
+          data={data}
+          x="date"
+          y="cake"
+          style={{ data: { fill: cakeColor, width: 4, alignment: "middle" } }}
+          labels={({ datum }) => datum.cake === 0 ? '' : datum.cake}
+          labelComponent={<VictoryLabel dy={0} style={{ fontSize: 4 }} />}
+        />
+        <VictoryBar
+          data={data}
+          x="date"
+          y="donut"
+          style={{ data: { fill: donutColor, width: 4, alignment: "middle" } }}
+          labels={({ datum }) => datum.donut === 0 ? '' : datum.donut}
+          labelComponent={<VictoryLabel dy={0} style={{ fontSize: 4 }} />}
+        />
+        <VictoryBar
+          data={data}
+          x="date"
+          y="soda"
+          style={{ data: { fill: sodaColor, width: 5, alignment: "middle" } }}
+          labels={({ datum }) => datum.soda === 0 ? '' : datum.soda}
+          labelComponent={<VictoryLabel dy={0} style={{ fontSize: 4 }} />}
         />
       </VictoryGroup>
     </VictoryChart>
