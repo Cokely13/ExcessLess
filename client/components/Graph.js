@@ -33,7 +33,7 @@ const Graph = () => {
         }
         return acc;
       }, []).map((entry) => ({
-        date: new Date(entry.date),
+        date: new Date(entry.date + 'T00:00:00-08:00'),
         treats: entry.treats,
       }));
       setData(formattedData);
