@@ -29,6 +29,8 @@ const TreatsInfo = () => {
     const entries = user.entries
     console.log("entries", entries)
 
+
+
     return (
       <div>
         <h1>{user && user.username}'s Treats</h1>
@@ -44,18 +46,19 @@ const TreatsInfo = () => {
        <option key={date} value={date}>{date}</option>
      ))}
    </select>
+   <h1>{showDate? showDate : "All"}</h1>
          <PieChart  treatCals = {showDate? entries.filter(entry => entry.date == showDate).reduce((acc, entry) => {
           if (entry.treatName in acc) {
-            acc[entry.treatName] += entry.cals;
+            acc[entry.treatName] += entry.cals * entry.number;
           } else {
-            acc[entry.treatName] = entry.cals;
+            acc[entry.treatName] = entry.cals * entry.number;
           }
           return acc;
         }, {}) : entries.reduce((acc, entry) => {
           if (entry.treatName in acc) {
-            acc[entry.treatName] += entry.cals;
+            acc[entry.treatName] += entry.cals * entry.number;
           } else {
-            acc[entry.treatName] = entry.cals;
+            acc[entry.treatName] = entry.cals * entry.number;
           }
           return acc;
         }, {})}
