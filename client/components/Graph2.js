@@ -72,9 +72,27 @@ const Graph2 = () => {
   const potatoChipsColor = '#40E0D0'
   const wineColor = '#00008B'
 
-  console.log('data', data)
+  const treats = [
+    { name: 'Beer', color: beerColor },
+    { name: 'Candy', color: candyColor },
+    { name: 'Wine', color: wineColor },
+    { name: 'Cake', color: cakeColor },
+    { name: 'Donut', color: donutColor },
+    { name: 'Soda', color: sodaColor }
+  ];
+
 
   return (
+    <div>
+      <h1>Treats by Week</h1>
+    <div>
+    {treats.map(treat => (
+      <span key={treat.name} style={{ marginRight: 10 }}>
+        <span style={{ display: 'inline-block', width: 10, height: 10, backgroundColor: treat.color }}></span>
+        <span style={{ marginLeft: 5 }}>{treat.name}</span>
+      </span>
+    ))}
+  </div>
     <VictoryChart
 >
       <VictoryAxis
@@ -141,6 +159,7 @@ const Graph2 = () => {
         />
       </VictoryGroup>
     </VictoryChart>
+    </div>
   );
 };
 
