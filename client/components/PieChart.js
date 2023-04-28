@@ -36,11 +36,11 @@ const PieChart = (props) => {
         <VictoryPie
           data={data}
           colorScale={[            "#FFC947",            "#FF4B4B",            "#4AABAF",            "#A8D8B9",            "#F9D5E5",          ]}
-          style={{ labels: { fill: "white", fontSize: 10 } }}
+          style={{ labels: { fill: "black", fontSize: 5 } }}
           labels={({ datum }) => `${datum.x}: ${datum.y}`}
-          labelRadius={({ innerRadius }) => innerRadius + 30}
-          labelPlacement="perpendicular"
-          labelComponent={<VictoryLabel />}
+          labelPlacement="parallel"
+          labelRadius={60}
+          labelComponent={<VictoryLabel/>}
           height={200}
           width={200}
         />
@@ -59,10 +59,10 @@ const PieChart = (props) => {
         <VictoryPie
           data={data2}
           colorScale={[            "#6C63FF",            "#FF6F91",            "#28C4D9",            "#FFB997",            "#B2FFD6",          ]}
-          style={{ labels: { fill: "white", fontSize: 10 } }}
+          style={{ labels: { fill: "black", fontSize: 5 } }}
           labels={({ datum }) => `${datum.x}: ${datum.y}`}
-          labelRadius={({ innerRadius }) => innerRadius + 30}
-          labelPlacement="perpendicular"
+          labelPlacement="parallel"
+          labelRadius={55}
           labelComponent={<VictoryLabel />}
           height={200}
           width={200}
