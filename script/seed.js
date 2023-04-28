@@ -17,8 +17,8 @@ async function seed() {
 
   // Creating Users
   const users = await Promise.all([
-    User.create({ username: 'cody', password: '123' }),
-    User.create({ username: 'murphy', password: '123' }),
+    User.create({ username: 'cody', password: '123', weight: "195" }),
+    User.create({ username: 'murphy', password: '123', weight: "202" }),
   ])
 
   const treats = await Promise.all([
@@ -28,12 +28,12 @@ async function seed() {
       size: '1 piece',
       servings: 35
     }),
-    Treat.create({
-      name: 'Hard Liquor',
-      cals: 120,
-      size: '1.5 ounces',
-      servings: 30
-    }),
+    // Treat.create({
+    //   name: 'Hard Liquor',
+    //   cals: 120,
+    //   size: '1.5 ounces',
+    //   servings: 30
+    // }),
     Treat.create( {
       name: 'Cake',
       cals: 150,
@@ -46,12 +46,12 @@ async function seed() {
       size: '1 donut',
       servings: 18
     }),
-    Treat.create( {
-      name: 'Potato Chips',
-      cals: 160,
-      size: '1 ounce',
-      servings: 22
-    }),
+    // Treat.create( {
+    //   name: 'Potato Chips',
+    //   cals: 160,
+    //   size: '1 ounce',
+    //   servings: 22
+    // }),
     Treat.create( {
       name: 'Wine',
       cals: 120,

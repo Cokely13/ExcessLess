@@ -24,3 +24,7 @@ form div {
   width: 50%;
   display: inline-block;
 }
+
+.red-label {
+  transform: translateX(-20px);
+}

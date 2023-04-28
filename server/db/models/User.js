@@ -14,7 +14,10 @@ const User = db.define('user', {
   },
   password: {
     type: Sequelize.STRING,
-  }
+  },
+  weight: {
+    type: Sequelize.INTEGER,
+  },
 })
 
 module.exports = User

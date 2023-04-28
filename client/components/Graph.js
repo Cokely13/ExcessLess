@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { VictoryBar, VictoryChart, VictoryAxis, VictoryLabel } from 'victory';
 import { useSelector, useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
 import { fetchSingleUser } from '../store/singleUserStore';
 import { format } from 'date-fns';
 
@@ -41,7 +40,7 @@ const Graph = () => {
   }, [user]);
 
   return (
-    <VictoryChart>
+    <VictoryChart >
       <VictoryAxis
         tickValues={data.map((entry) => entry.date)}
         tickFormat={(date) => format(date, 'MMM d')}
@@ -51,7 +50,12 @@ const Graph = () => {
           },
         }}
       />
-      <VictoryAxis dependentAxis />
+<VictoryAxis dependentAxis
+  style={{
+    axis: { transform: "translateX(-25px)", dx: "100px" },
+    tickLabels: { fill: "red", dx: "115px", textAnchor: "end"  },
+  }}
+/>
       <VictoryBar
         data={data}
         x="date"
