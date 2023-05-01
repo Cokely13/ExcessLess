@@ -9,6 +9,7 @@ function Treats() {
   const { id } = useSelector((state) => state.auth);
 
   const [selectedWeek, setSelectedWeek] = useState('');
+  const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
     dispatch(fetchTreats());
@@ -51,6 +52,7 @@ function Treats() {
   }, 0);
 
   const handleSubmit = async () => {
+    setSubmitting(true);
     allTreats.forEach((treat) => {
       const quantity = dailyValues[treat.id];
       if (quantity > 0) {
@@ -87,88 +89,183 @@ function Treats() {
 
   const weekOptions = getWeekOptions();
 
+  // return (
+  //   <div>
+  //     <h2>Treats</h2>
+  //     <label htmlFor="week-select">Select Week:</label>
+  //     <select
+  //       id="week-select"
+  //       value={selectedWeek}
+  //       onChange={(event) => setSelectedWeek(event.target.value)}
+  //     >
+  //       <option value=""></option>
+  //       {weekOptions.map((option) => (
+  //         <option key={option} value={option}>
+  //           {option}
+  //         </option>
+  //       ))}
+  //     </select>
+  //     <table className="treats-table">
+  //       <thead>
+  //         <tr>
+  //           <th>Name</th>
+  //           <th>Calories</th>
+  //           <th>Size</th>
+  //           <th>Weekly</th>
+  //           <th>WeeklyLbs</th>
+  //           <th>DailyLbs</th>
+  //         </tr>
+  //       </thead>
+  //       <tbody>
+  //         {allTreats.map((treat) => (
+  //           <tr key={treat.id}>
+  //             <td className="table-cell">{treat.name}</td>
+  //             <td className="table-cell">{treat.cals}</td>
+  //             <td className="table-cell">{treat.size}</td>
+  //             <td className="table-cell">
+  //               <select
+  //                 className="table-dropdown"
+  //                 value={dailyValues[treat.id] || '0'}
+  //                 onChange={(event) => handleDailyChange(event, treat.id)}
+  //               >
+  //                 <option value=""></option>
+  //                 {Array.from({ length: 99 }, (_, i) => i).map((value) => (
+  //                   <option key={value} value={value}>
+  //                     {value}
+  //                   </option>
+  //                 ))}
+  //               </select>
+  //             </td>
+  //             <td className="table-cell">
+  //               {dailyValues[treat.id]
+  //                 ? calculateDailyLbs(treat.cals, dailyValues[treat.id])
+  //                 : '0.00'}
+  //             </td>
+  //             <td className="table-cell">
+  //               {dailyValues[treat.id]
+  //                 ? calculateWeeklyLbs(
+  //                     calculateDailyLbs(treat.cals, dailyValues[treat.id])
+  //                   )
+  //                 : '0.00'}
+  //             </td>
+  //           </tr>
+  //         ))}
+  //         <tr>
+  //           <td className="table-cell totals-cell">Totals:</td>
+  //           <td className="table-cell totals-cell"></td>
+  //           <td className="table-cell totals-cell"></td>
+  //           <td className="table-cell totals-cell">
+  //             {totalDaily.toFixed(2)}
+  //           </td>
+  //           <td className="table-cell totals-cell">
+  //             {totalDailyLbs.toFixed(2)}
+  //           </td>
+  //           <td className="table-cell totals-cell">
+  //             {totalWeeklyLbs.toFixed(2)}
+  //           </td>
+  //         </tr>
+  //       </tbody>
+  //     </table>
+  //     <div>
+  //       <button onClick={handleSubmit}>Submit</button>
+  //     </div>
+  //   </div>
+  // );
   return (
     <div>
-      <h2>Treats</h2>
-      <label htmlFor="week-select">Select Week:</label>
-      <select
-        id="week-select"
-        value={selectedWeek}
-        onChange={(event) => setSelectedWeek(event.target.value)}
-      >
-        <option value=""></option>
-        {weekOptions.map((option) => (
-          <option key={option} value={option}>
-            {option}
-          </option>
-        ))}
-      </select>
-      <table className="treats-table">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Calories</th>
-            <th>Size</th>
-            <th>Weekly</th>
-            <th>WeeklyLbs</th>
-            <th>DailyLbs</th>
-          </tr>
-        </thead>
-        <tbody>
-          {allTreats.map((treat) => (
-            <tr key={treat.id}>
-              <td className="table-cell">{treat.name}</td>
-              <td className="table-cell">{treat.cals}</td>
-              <td className="table-cell">{treat.size}</td>
-              <td className="table-cell">
-                <select
-                  className="table-dropdown"
-                  value={dailyValues[treat.id] || '0'}
-                  onChange={(event) => handleDailyChange(event, treat.id)}
-                >
-                  <option value=""></option>
-                  {Array.from({ length: 99 }, (_, i) => i).map((value) => (
-                    <option key={value} value={value}>
-                      {value}
-                    </option>
-                  ))}
-                </select>
-              </td>
-              <td className="table-cell">
-                {dailyValues[treat.id]
-                  ? calculateDailyLbs(treat.cals, dailyValues[treat.id])
-                  : '0.00'}
-              </td>
-              <td className="table-cell">
-                {dailyValues[treat.id]
-                  ? calculateWeeklyLbs(
-                      calculateDailyLbs(treat.cals, dailyValues[treat.id])
-                    )
-                  : '0.00'}
-              </td>
-            </tr>
-          ))}
-          <tr>
-            <td className="table-cell totals-cell">Totals:</td>
-            <td className="table-cell totals-cell"></td>
-            <td className="table-cell totals-cell"></td>
-            <td className="table-cell totals-cell">
-              {totalDaily.toFixed(2)}
-            </td>
-            <td className="table-cell totals-cell">
-              {totalDailyLbs.toFixed(2)}
-            </td>
-            <td className="table-cell totals-cell">
-              {totalWeeklyLbs.toFixed(2)}
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <div>
-        <button onClick={handleSubmit}>Submit</button>
-      </div>
+      {submitting ? (
+        <div>
+          <p>Your entry has been submitted!</p>
+          <div>
+            <button onClick={() => { setSubmitting(false); }}>Submit Another Entry</button>
+            <a href="/">Home</a>
+          </div>
+        </div>
+      ) : (
+        <div>
+          <h2>Treats</h2>
+          <label htmlFor="week-select">Select Week:</label>
+          <select
+            id="week-select"
+            value={selectedWeek}
+            onChange={(event) => setSelectedWeek(event.target.value)}
+          >
+            <option value=""></option>
+            {weekOptions.map((option) => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
+          </select>
+          <table className="treats-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Calories</th>
+                <th>Size</th>
+                <th>Weekly</th>
+                <th>WeeklyLbs</th>
+                <th>DailyLbs</th>
+              </tr>
+            </thead>
+            <tbody>
+              {allTreats.map((treat) => (
+                <tr key={treat.id}>
+                  <td className="table-cell">{treat.name}</td>
+                  <td className="table-cell">{treat.cals}</td>
+                  <td className="table-cell">{treat.size}</td>
+                  <td className="table-cell">
+                    <select
+                      className="table-dropdown"
+                      value={dailyValues[treat.id] || '0'}
+                      onChange={(event) => handleDailyChange(event, treat.id)}
+                    >
+                      <option value=""></option>
+                      {Array.from({ length: 99 }, (_, i) => i).map((value) => (
+                        <option key={value} value={value}>
+                          {value}
+                        </option>
+                      ))}
+                    </select>
+                  </td>
+                  <td className="table-cell">
+                    {dailyValues[treat.id]
+                      ? calculateDailyLbs(treat.cals, dailyValues[treat.id])
+                      : '0.00'}
+                  </td>
+                  <td className="table-cell">
+                    {dailyValues[treat.id]
+                      ? calculateWeeklyLbs(
+                          calculateDailyLbs(treat.cals, dailyValues[treat.id])
+                        )
+                      : '0.00'}
+                  </td>
+                </tr>
+              ))}
+              <tr>
+                <td className="table-cell totals-cell">Totals:</td>
+                <td className="table-cell totals-cell"></td>
+                <td className="table-cell totals-cell"></td>
+                <td className="table-cell totals-cell">
+                  {totalDaily.toFixed(2)}
+                </td>
+                <td className="table-cell totals-cell">
+                  {totalDailyLbs.toFixed(2)}
+                </td>
+                <td className="table-cell totals-cell">
+                  {totalWeeklyLbs.toFixed(2)}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div>
+            <button onClick={handleSubmit}>Submit</button>
+          </div>
+        </div>
+      )}
     </div>
   );
+
                   }
 
 
