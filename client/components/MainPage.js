@@ -1,5 +1,9 @@
 import React from "react";
-
+import Graph from "./Graph";
+import Graph2 from "./Graph2";
+import TreatsInfo from "./TreatsInfo";
+import Treats from "./Treats";
+import UserPage from "./UserPage";
 
 const MainPage = () => {
   return (
@@ -7,30 +11,30 @@ const MainPage = () => {
       <section>
         <div className="layout text-2xl text-black">
           <div className="content1 centered">
-            Content1
+            NAVBAR
           </div>
           <div className="content2 centered">
-          Content1
+        <TreatsInfo/>
           </div>
           <div className="content3 centered">
-          Content1
+          <Graph/>
           </div>
 
           <div className="content4 centered">
-          Content1
+          <Graph2/>
           </div>
           <div className="content5 centered">
-          Content1
+          Content5
           </div>
           <div className="content6 centered">
-          Content1
+          <UserPage/>
           </div>
 
           <div className="content7 centered">
-          Content1
+          Content7
           </div>
           <div className="content8 centered">
-          Content1
+          <Treats/>
           </div>
         </div>
       </section>
