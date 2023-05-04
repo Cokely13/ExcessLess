@@ -8,6 +8,7 @@ import WeekForm from './components/WeekForm';
 import UserPage from './components/UserPage';
 import Graph from './components/Graph';
 import UserDetailPage from './components/UserDetailPage';
+import Home1 from './components/Home1';
 import Graph2 from './components/Graph2';
 import {me} from './store'
 import TreatsInfo from './components/TreatsInfo';
@@ -27,6 +28,7 @@ class Routes extends Component {
       <div>
         {isLoggedIn ? (
           <Switch>
+            <Route exact path="/home1" component={Home1} />
             <Route exact path="/home" component={Home} />
             <Route exact path="/treats" component={Treats} />
             <Route exact path="/graph" component={Graph} />
