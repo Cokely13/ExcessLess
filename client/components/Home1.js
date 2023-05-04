@@ -34,10 +34,14 @@ export const Home1 = (props) => {
 
       <section className="hero">
         <h1>My Blog</h1>
-      </section>
-      <div className="graph">
+
+      {/* <div className="graph"> */}
       <Graph/>
-      </div>
+      {/* </div>
+      <div className="graph"> */}
+      <Graph2/>
+      {/* </div> */}
+      </section>
       <main>
 
         <section className="blog-list">

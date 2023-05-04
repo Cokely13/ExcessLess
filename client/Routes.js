@@ -10,6 +10,7 @@ import Graph from './components/Graph';
 import UserDetailPage from './components/UserDetailPage';
 import Home1 from './components/Home1';
 import Graph2 from './components/Graph2';
+import MainPage from './components/MainPage';
 import {me} from './store'
 import TreatsInfo from './components/TreatsInfo';
 
@@ -30,6 +31,7 @@ class Routes extends Component {
           <Switch>
             <Route exact path="/home1" component={Home1} />
             <Route exact path="/home" component={Home} />
+            <Route exact path="/main" component={MainPage} />
             <Route exact path="/treats" component={Treats} />
             <Route exact path="/graph" component={Graph} />
             <Route exact path="/graph2" component={Graph2} />
