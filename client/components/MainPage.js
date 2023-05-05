@@ -4,17 +4,18 @@ import Graph2 from "./Graph2";
 import TreatsInfo from "./TreatsInfo";
 import Treats from "./Treats";
 import UserPage from "./UserPage";
+import Navbar from "./Navbar"
 
 const MainPage = () => {
   return (
     <React.Fragment>
       <section>
-        <div className="layout text-2xl text-black">
-          <div className="content1 centered">
-            NAVBAR
-          </div>
+        <div className="layout text-2xl text-black" >
+          {/* <div className="content1 centered">
+            <Navbar/>
+          </div> */}
           <div className="content2 centered">
-        <TreatsInfo/>
+          <Graph2/>
           </div>
           <div className="content3 centered">
           <Graph/>
@@ -24,17 +25,13 @@ const MainPage = () => {
           <Graph2/>
           </div>
           <div className="content5 centered">
-          Content5
-          </div>
-          <div className="content6 centered">
           <UserPage/>
           </div>
-
-          <div className="content7 centered">
-          Content7
+          <div className="content6 centered">
+          <Treats/>
           </div>
           <div className="content8 centered">
-          <Treats/>
+          <TreatsInfo/>
           </div>
         </div>
       </section>

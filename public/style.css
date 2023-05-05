@@ -412,25 +412,26 @@ footer {
   font-size: 1.2rem;
 }
 
-
+/*
 .graph {
-  max-width: 400px;
+  max-width: 200px;
   margin-left: auto;
   margin-right: auto;
-}
+} */
 
 .centered{
   display: flex;
   justify-content: center;
   align-items: center;
+  /* padding: 3rem; */
 }
 .layout{
   width: 100%;
   height: 100vh;
   display: grid;
   grid-template-columns: 100%;
-  grid-template-rows: 2fr 5fr 2fr 2fr 2fr 2fr 1fr ;
-  grid-template-areas: 'content1'
+  grid-template-rows: 5fr 2fr 2fr 2fr 2fr 1fr ;
+  grid-template-areas:
                        'content2'
                        'content3'
                        'content4'
@@ -441,35 +442,61 @@ footer {
 }
 .content1{
   grid-area: content1;
-  background-color: rgb(9, 91, 64);
+  /* padding: 20px; */
+  border-radius: 10px;
+border-color: black;
+border-style: solid;
 }
 .content2{
   grid-area: content2;
-  background-color: rgb(23, 123, 66);
+  /* background-color: rgb(23, 123, 66); */
+  /* padding: 100px; */
+  border-radius: 10px;
+border-color: red;
+border-style: solid;
 }
 .content3{
   grid-area: content3;
-  background-color: rgb(2, 68, 46);
+  /* background-color: rgb(2, 68, 46); */
+  /* padding: 200 px; */
+  border-radius: 10px;
+border-color: blue;
+border-style: solid;
+
 }
 .content4{
   grid-area: content4;
-  background-color: rgb(15, 18, 106);
+  /* padding: 75px; */
+border-color: blue;
+border-style: solid;
 }
 .content5{
   grid-area: content5;
-  background-color: rgb(134, 20, 121);
+  /* padding: 20px; */
+  border-radius: 10px;
+border-color: black;
+border-style: solid;
 }
 .content6{
   grid-area: content6;
-  background-color: rgb(44, 162, 18);
+  /* padding: 20px; */
+  border-radius: 10px;
+border-color: black;
+border-style: solid;
 }
 .content7{
   grid-area: content7;
-  background-color: rgb(164, 34, 34);
+  /* padding: 20px; */
+  border-radius: 10px;
+border-color: black;
+border-style: solid;
 }
 .content8{
   grid-area: content8;
-  background-color: rgb(73, 6, 82);
+  padding: 20px;
+  border-radius: 10px;
+border-color: black;
+border-style: solid;
 }
 
 @media only screen and (min-width: 768px){
@@ -478,14 +505,14 @@ footer {
       height: 100vh;
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      grid-template-rows: 2fr 5fr 2fr 2fr 2fr 2fr 1fr ;
-      grid-template-areas: 'content1 content1 content1 content1'
+      grid-template-rows: 5fr 2fr 2fr 2fr 2fr ;
+      grid-template-areas:
                            'content8 content2 content2 content2'
                            'content8 content2 content2 content2'
                            'content8 content2 content2 content2'
                            'content8 content3 content4 content5'
                            'content8 content3 content4 content6'
-                           'content7 content7 content7 content7';
+
 
   }
 
